@@ -1,9 +1,6 @@
-from flask import Flask
-# from flask_cors import CORS
-import numpy as np 
+core.pyimport numpy as np 
 import pandas as pd 
 import json
-
 
 newdf1 = pd.read_csv('data/dataset.csv')
 
@@ -21,7 +18,6 @@ for i in range(len(newdf1.iloc[:, 3].values)):
 
 for i in range(len(newdf1.iloc[:, 4].values)):
   newdf1.iloc[:, 4].values[i] = json.loads(newdf1.iloc[:, 4].values[i])
-
 
 def recommend(id):
   video_tags = []
@@ -47,21 +43,10 @@ def recommend(id):
       }
       similarity_vidoes_score.append(similarity_dic)
   # print(similarity_vidoes_score)
-  return sorted(similarity_vidoes_score, key = lambda i: i['similarity'], reverse=True)[:4]
-  # print(sorted(similarity_vidoes_score, key = lambda i: i['similarity'], reverse=True)[:4])
+  print(sorted(similarity_vidoes_score, key = lambda i: i['similarity'], reverse=True)[:4])
   # print(video_idx)
 
 
+  # print(all_same_cat_tags)
 
-app = Flask(__name__)
-# CORS(app)
-
-@app.route('/<query>')
-def index(query):
-  q = json.loads(str(query))
-  # print(recommend(q))
-  print(q)
-  return 'fdsdf'
-
-if __name__ == "__main__":
-  app.run()
+recommend(['3Kwpk9J8tJM', 'BgYJmXbIVZo', '6I2yAoxBRtI', 'kJzGH0PVQHQ'])
